@@ -1,0 +1,49 @@
+<app-nav-bar [totalQuantity]="totalQunatity"></app-nav-bar>
+<div class="cart-page container">
+  <p *ngIf="!products?.length"><img class="no-items" src="assets/emptycart.png" /></p>
+  <div *ngIf="products?.length">
+    <div class="cart-product">
+      <table class="cart-table">
+        <tr class="heading">
+          <th class="wh-10">Items</th>
+          <th class="wh-20">Title</th>
+          <th class="wh-10">Price</th>
+          <th class="wh-20">Quantity</th>
+          <th class="wh-10">Total</th>
+          <th class="wh-20"></th>
+        </tr>
+        <tr *ngFor="let product of products; let i = index">
+          <td><img class="cart-image" [src]='basePath+product?.product?.image' /></td>
+          <td (click)="goToProductDetail(product.product.id)" class="product-dtl">{{ product?.product?.title }}</td>
+          <td>₹ {{ product?.product?.price }}</td>
+          <td>
+            <div class="btn-group">
+              <button class="qty-btn minus" (click)="decrementQty(i, product.id)">
+                <span>-</span>
+              </button>
+              <input class="qty-text" type="text" name="quantity" [(ngModel)]="product.quantity" />
+              <button class="qty-btn plus" (click)="incrementQty(i, product.id)">
+                <span>+</span>
+              </button>
+            </div>
+          </td>
+          <td>{{ product?.product?.total }}</td>
+          <td>
+            <button type="button" class="btn" (click)="deleteProductItem(product.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 text-end">
+        <p class="grand-text">Grand Total : </p>
+      </div>
+      <div class="col-md-4">
+        <p class="grand-text card-total">{{ cartTotal }}</p>
+      </div>
+    </div>
+  </div>
+</div>

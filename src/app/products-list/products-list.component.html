@@ -1,0 +1,21 @@
+<!-- Product list-->
+<app-nav-bar [totalQuantity]="totalQuantity"></app-nav-bar>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-3" *ngFor="let product of products;let i=index">
+      <div class="card shadow" style="width: 18rem;">
+        <img [src]='basePath+product.image' class="card-img-top" [alt]="product.title">
+        <div class="card-body">
+          <h5 class="card-title" (click)="openProductDetail(product.id)">{{product.title}}</h5>
+          <h5 class="card-text price-text mb-0">₹ {{product.price}}</h5>
+          <h5 class="card-text">{{product.category}}</h5>
+        </div>
+        <div class="card-footer p-0 border-0">
+          <div class="d-grid gap-2">
+            <a (click)="addToCart(product.id)" class="btn btn-primary rounded-0 rounded-bottom">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
